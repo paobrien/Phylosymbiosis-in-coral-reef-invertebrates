@@ -14,10 +14,13 @@ export TMPDIR=/export/scratch/pobrien
 TD=$(mktemp -d --tmpdir=/export/scratch/pobrien)
 
 
-### ---------------------------- ###
+### ---------------------------------------- ###
 
 
-### QIIME 2 ANALYSIS ####
+########################
+### QIIME 2 ANALYSIS ###
+########################
+
 
 # Commands used to create ASV table and taxonomic table used for the analysis in the manuscript on phylosymbiosis in coral reef invertebrates
 # Paul A. O'Brien
@@ -25,7 +28,6 @@ TD=$(mktemp -d --tmpdir=/export/scratch/pobrien)
 
 
 ### ---------------------------- ###
-
 
 
 module load qiime2/2018.4
