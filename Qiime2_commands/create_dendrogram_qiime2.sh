@@ -127,6 +127,7 @@ qiime diversity beta-rarefaction \
   --p-sampling-depth 10000 \
   --o-visualization coral_den_FI-tree_trim_wuf_upgma.qzv
 
+# Unweighted UniFrac
 qiime diversity beta-rarefaction \
   --i-table /export/home/l-p/pobrien/PhD/Ramaciotti_OBR5432-95032942/Output_files/Filtered_no_mitochondira_chloroplast_eukaryota/Feature_tables/Coral/coral-wCar-no-doubles-min-2-grouped-f.qza \
   --i-phylogeny /export/home/l-p/pobrien/PhD/Ramaciotti_OBR5432-95032942/Output_files/Tree_files/Fragment_insertion/insertion_tree_trimmed.qza \
