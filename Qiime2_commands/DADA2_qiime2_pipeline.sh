@@ -67,6 +67,10 @@ qiime feature-table tabulate-seqs \
   --i-data rep-seqs-dada2.qza \
   --o-visualization rep-seqs.qzv
 
+
+## Note: used frag-insertion method for UniFrac phylogeny. See below
+
+
 qiime alignment mafft \
   --i-sequences rep-seqs-dada2.qza \
   --o-alignment aligned-rep-seqs.qza 
@@ -90,7 +94,7 @@ qiime diversity core-metrics-phylogenetic \
   --m-metadata-file metadata.tsv \
   --output-dir Core-metrics-results-dada2
 
-### repeat with filtered table (see filter_data script) ---------
+### repeat with filtered table (see below) ---------
 
 qiime diversity core-metrics-phylogenetic \
   --i-phylogeny ../Output_files/Tree_files/Rooted-tree/rooted-tree.qza \
@@ -160,4 +164,30 @@ qiime metadata tabulate \
   --o-visualization taxonomy_silva.qzv
 
 
+###################
+### Filter data ###
+###################
+
+
+# Remove Chloroplast, Mitochondria and Eukarytoic sequences from data
+
+qiime taxa filter-table \
+  --i-table Output_files/Feature_tables/table-dada2.qza \
+  --i-taxonomy Output_files/Taxonomy_silva/taxonomy_silva.qza \
+  --p-exclude Mitochondria,Chloroplast,Eukaryota \
+  --o-filtered-table table-dada2-f.qza
+
+# Remove unknown gorgonian samples
+qiime feature-table filter-samples \
+  --i-table table-dada2-f.qza \
+  --m-metadata-file Metadata_files/metadata.tsv \
+  --p-where "\"sample-id\" NOT IN ('Gor1','Gor2','Gor3')" \
+  --o-filtered-table table-NoG-f.qza
+
+# Remove blanks and seawater samples as irrelevant to host phylogeny
+qiime feature-table filter-samples \
+  --i-table table-NoG-f.qza \
+  --m-metadata-file Metadata_files/metadata.tsv \
+  --p-where "\"Taxonomy\" NOT IN ('Blank','Seawater')" \
+  --o-filtered-table table-NoGBS-f.qza
 
